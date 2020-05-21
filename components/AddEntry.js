@@ -152,7 +152,7 @@ class AddEntry extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 50, //  I changed itE
     backgroundColor: white,
   },
   row: {
