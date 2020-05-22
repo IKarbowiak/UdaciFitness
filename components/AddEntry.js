@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import {connect} from 'react-redux'
+import {CommonActions} from '@react-navigation/native'
 
 import {getMetricMetaInfo, timeToString, getDailyReminderValue} from '../utils/helpers'
 import UdaciSlider from './UdaciSlider'
@@ -81,6 +82,8 @@ class AddEntry extends Component {
     }))
 
     // Navigate to home
+    this.toHome()
+
     // Save info to database
     submitEntry({key, entry})
 
@@ -95,9 +98,17 @@ class AddEntry extends Component {
       [key]: getDailyReminderValue()
     }))
     // Navigate to home
+    this.toHome()
 
     // Save info to database
     removeEntry(key)
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(
+        CommonActions.goBack({
+            key: 'AddEntry',
+        }))
   }
 
   render() {
@@ -106,7 +117,7 @@ class AddEntry extends Component {
       return (
         <View style={styles.center}>
           <Ionicons
-            name={Platform.OS === 'ios' ? 'ios-happy-outline' : "md-happy"}
+            name={Platform.OS === 'ios' ? 'ios-happy' : "md-happy"}
             size={100}
           />
           <Text>You are already logged your information for today</Text>
